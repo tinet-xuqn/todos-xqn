@@ -3,26 +3,28 @@
 <head>
 	<meta charset="utf-8">
 	<title>todos</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 	<aside id="sidebar">
 
-		<header>
+		<header class="side">
 			<h3>Backbone.js</h3>
 			<span class="source-links">
-				<p>第一个链接</p><a href="https://www.baidu.com">点这里</a>
-				<p>第二个链接</p><a href="https://www.baidu.com">点这里</a>
-				<p>第三个链接</p><a href="https://www.baidu.com">点这里</a>
-				<p>第四个链接</p><a href="https://www.baidu.com">点这里</a>
+				<p>第一个链接<br><a href="https://www.baidu.com">点这里</a></p>
+				<p>第二个链接<br><a href="https://www.baidu.com">点这里</a></p>
+				<p>第三个链接<br><a href="https://www.baidu.com">点这里</a></p>
+				<p>第四个链接<br><a href="https://www.baidu.com">点这里</a></p>
 			</span>
 		</header>
-		<div>
-			<blockquote>一段引用的文字</blockquote>
-			<footer>Backbone.js</footer>
+		<div class="side">
+			<blockquote class="italic">"一段引用的文字一段引用的文字一段引用的文字一段引用的文字一段引用的文字一段引用的文字一一段引用的文字"</blockquote>
+			<span class="qipao"></span>
+			<footer><a href="">Backbone.js</a></footer>
 		</div>
 
 		
-		<div>
+		<div class="side">
 			<h4>三个引用</h4>
 			<ul>
 				<li><a href="">first</a></li>
@@ -32,10 +34,24 @@
 		</div>
 
 		<footer>
-			<p>llllllllllllll<a href="">sss</a>
+			<p class="italic">If you have other helpful links to share,or find any of the links above no longer work,please <a href="">let us know</a>
 			</p>
 		</footer>
 	</aside>
+
+	<div id="todos">
+		<header>
+			<h1>todos</h1>
+			<input type="text" name="todo" placeholder="What needs to be done?">
+		</header>
+	</div>
+
+	<footer id="foot">
+		<p>Double-click to edit a todo</p>
+		<p>Written by <a href="">XQN</a></p>
+		<p>Part of <a href="">TOdoMVC</a></p>
+	</footer>
+
 
 </body>
 </html>
