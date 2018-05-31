@@ -9,8 +9,11 @@ aside{
 	background-color: white;
 	top: 8px;
 	bottom: 0px;
+	left: 8px;
 	padding: 10px;
 	z-index: 1;
+	transition-property: left;
+	transition-duration: 500ms; 
 }
 #todos{
 	position: relative;
@@ -18,13 +21,12 @@ aside{
 	margin: 0px 0 40px 0; 
 	text-align: center;
 
-
 }
 #todos h1{
 	width: 100%;
 	font-size: 100px;
 	font-weight: 400;
-	color:rgba(175,47,47,0.15); 
+	color:rgba(175,47,47,0.35); 
 	margin-top: -10px;
 	margin-bottom: -5px;
 }
@@ -33,6 +35,12 @@ aside{
 	text-align: center;
 	font-size: 10px;
 	color: #bfbfbf;
+}
+/*这里and后面要有括号，坑的一笔*/
+@media screen and (max-width: 890px){
+	aside{left: -300px;}
+	#todos{padding-left: 0px;}
+	#foot{padding-left: 0px;}
 }
 .side{
 	padding: 2px;
@@ -82,7 +90,7 @@ input{
 	height: 33px;
 	padding: 16px 16px 16px 60px;
 	font-size: 24px;
-
+	border:0px;
 }
 input::-webkit-input-placeholder{
 	font-size: 24px;
