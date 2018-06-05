@@ -12,12 +12,69 @@
 // 	}
 
 // }
-var inputtext = document.querySelector("input");
+var inputtext = document.getElementById("myText");
+var list = 0;
+
 EventUtil.addHandler(inputtext,"keydown", function(event){
 	event = EventUtil.getEvent(event);
-	if (event.keyCode ==13) {
-		inputtext.value;
+	if (event.keyCode == 13 &&(inputtext.value.length>0)) {
+ 		// 长度条件，防止没输入内容
+ 		if (list==0) {
+ 			var section = document.createElement("section");
+			section.style.display = "block";
+			var div = document.getElementById("todos");
+			div.appendChild(section);
+
+			var ul = document.createElement("ul");
+			ul.className = "todo-list";
+			section.appendChild(ul);
+
+			var li = document.createElement("li");
+			ul.appendChild(li);
+
+			var input = document .createElement("input");
+			input.type = "checkbox";
+			input.className = "list";
+			li.appendChild(input);
+
+			var label = document.createElement("label");
+			li.appendChild(label);
+
+			var button = document.createElement("button");
+			li.appendChild(button);
+
+			label.innerText = inputtext.value;
+ 		} else {
+ 			var ul = document.querySelector(".todo-list");
+
+ 			var li = document.createElement("li");
+			ul.appendChild(li);
+
+			var input = document .createElement("input");
+			input.type = "checkbox";
+			input.className = "list";
+			li.appendChild(input);
+
+
+			var label = document.createElement("label");
+			li.appendChild(label);
+
+			var button = document.createElement("button");
+			li.appendChild(button);
+
+
+
+			label.innerText = inputtext.value;
+
+ 		}
+
+		list=list+1;
+		inputtext.value = null;
+		// 文本框内容清除
+
 	};
 });
+
+
 
 

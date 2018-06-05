@@ -91,7 +91,9 @@ header input{
 	padding: 16px 16px 16px 60px;
 	font-size: 24px;
 	border:0px;
-	box-shadow: darkgrey 5px 5px 30px 5px;
+	border: 1px solid #c0c0c0;
+
+	/*box-shadow: darkgrey 5px 5px 30px 5px;*/
 }
 header input::-webkit-input-placeholder{
 	font-size: 24px;
@@ -104,15 +106,14 @@ header input::-webkit-input-placeholder{
 	padding: 0px;
 	list-style: none;
 	background-color: white;
-	width: 550px;
+	width: 552px;
 	text-align: left;
 }
 
 .todo-list li{
 	position: relative;
 	font-size: 24px;
-	border-bottom: 1px solid gray;
-	height: 58px;
+	border: 1px solid #c0c0c0;
 	width: 550px;
 }
 .todo-list li label{
@@ -121,6 +122,32 @@ header input::-webkit-input-placeholder{
 	width: 430px;
 	height: 28px;
 	display: block;
+	line-height: 100%;
 }
-
-
+button{
+	position: absolute;
+	display: none;
+	margin: auto 0px;
+	padding: 0px;
+	right: 10px;
+	top: 0px;
+	bottom: 0px;
+	width: 40px;
+	height: 40px;
+	color: #cc9a9a;
+}
+.list{
+	position: absolute;
+	zoom: 70%;
+	margin: auto 0px;
+	padding: 0px;
+	left:0px;
+	top: 0px;
+	bottom: 0px;
+	width: 40px;
+	height: 40px;
+	color: #cc9a9a;
+}
+.todo-list li:hover button{
+	display: block;
+}
