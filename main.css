@@ -36,7 +36,7 @@ aside{
 	font-size: 10px;
 	color: #bfbfbf;
 }
-/*这里and后面要有括号，坑的一笔*/
+
 @media screen and (max-width: 890px){
 	aside{left: -300px;}
 	#todos{padding-left: 0px;}
@@ -85,15 +85,42 @@ a:hover{
 #foot a{
 	color: #bfbfbf;
 }
-input{
+header input{
 	width: 474px;
 	height: 33px;
 	padding: 16px 16px 16px 60px;
 	font-size: 24px;
 	border:0px;
+	box-shadow: darkgrey 5px 5px 30px 5px;
 }
-input::-webkit-input-placeholder{
+header input::-webkit-input-placeholder{
 	font-size: 24px;
 	font-style: italic;
 	color: rgba(0,8,8,0.2);
 }
+
+.todo-list{
+	margin: 0px auto;
+	padding: 0px;
+	list-style: none;
+	background-color: white;
+	width: 550px;
+	text-align: left;
+}
+
+.todo-list li{
+	position: relative;
+	font-size: 24px;
+	border-bottom: 1px solid gray;
+	height: 58px;
+	width: 550px;
+}
+.todo-list li label{
+	margin-left: 45px;
+	padding: 15px 60px 15px 15px;
+	width: 430px;
+	height: 28px;
+	display: block;
+}
+
+
