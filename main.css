@@ -123,6 +123,7 @@ header input::-webkit-input-placeholder{
 	height: 28px;
 	display: block;
 	line-height: 100%;
+	color: gray;
 }
 button{
 	position: absolute;

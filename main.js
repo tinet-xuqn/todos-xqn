@@ -24,57 +24,76 @@ EventUtil.addHandler(inputtext,"keydown", function(event){
 			section.style.display = "block";
 			var div = document.getElementById("todos");
 			div.appendChild(section);
-
 			var ul = document.createElement("ul");
 			ul.className = "todo-list";
 			section.appendChild(ul);
 
+
+
 			var li = document.createElement("li");
 			ul.appendChild(li);
-
 			var input = document .createElement("input");
 			input.type = "checkbox";
 			input.className = "list";
-			li.appendChild(input);
+			input.setAttribute("onclick", "checkedlist()");
 
+			li.appendChild(input);
 			var label = document.createElement("label");
 			li.appendChild(label);
-
 			var button = document.createElement("button");
-			li.appendChild(button);
+			button.className = "destroy";
+			button.setAttribute("onclick", "shanchu()");
+			// button.onclick = function(){shanchu()}；
 
+			li.appendChild(button);
 			label.innerText = inputtext.value;
  		} else {
  			var ul = document.querySelector(".todo-list");
-
  			var li = document.createElement("li");
 			ul.appendChild(li);
-
 			var input = document .createElement("input");
 			input.type = "checkbox";
 			input.className = "list";
+			input.setAttribute("onclick", "checkedlist()");
+
 			li.appendChild(input);
-
-
 			var label = document.createElement("label");
 			li.appendChild(label);
-
 			var button = document.createElement("button");
+			button.className = "destroy";
+			button.setAttribute("onclick", "shanchu()");
+
+			// button.onclick = function(){shanchu()}；
+
 			li.appendChild(button);
-
-
-
 			label.innerText = inputtext.value;
 
  		}
-
 		list=list+1;
 		inputtext.value = null;
 		// 文本框内容清除
-
 	};
 });
+function shanchu(){
 
+	event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+	// list = list -1;
+
+
+}
+function checkedlist(){
+	if (event.target.checked) {
+		event.target.parentNode.childNodes[1].style.textDecoration = "line-through";
+		event.target.parentNode.childNodes[1].style.color = '#d9d9d9';
+
+		event.target.parentNode.className = "havedone";
+
+	} else {
+		event.target.parentNode.childNodes[1].style.textDecoration = "none";
+		event.target.parentNode.childNodes[1].style.color = 'gray';
+		event.target.parentNode.classList.remove("havedone");	
+	}
+}
 
 
 
