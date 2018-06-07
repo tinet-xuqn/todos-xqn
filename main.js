@@ -19,37 +19,28 @@ EventUtil.addHandler(inputtext,"keydown", function(event){
 	event = EventUtil.getEvent(event);
 	if (event.keyCode == 13 &&(inputtext.value.length>0)) {
  		// 长度条件，防止没输入内容
+ 		var ul
  		if (list==0) {
  			var section = document.createElement("section");
+ 			section.className = "main";
 			section.style.display = "block";
 			var div = document.getElementById("todos");
 			div.appendChild(section);
-			var ul = document.createElement("ul");
+
+			var inputall = document .createElement("input");
+			inputall.type = "checkbox";
+			inputall.id = "select-all";
+			section.appendChild(inputall);
+			// 全选按钮
+
+			ul = document.createElement("ul");
 			ul.className = "todo-list";
 			section.appendChild(ul);
-
-
-
-			var li = document.createElement("li");
-			ul.appendChild(li);
-			var input = document .createElement("input");
-			input.type = "checkbox";
-			input.className = "list";
-			input.setAttribute("onclick", "checkedlist()");
-
-			li.appendChild(input);
-			var label = document.createElement("label");
-			li.appendChild(label);
-			var button = document.createElement("button");
-			button.className = "destroy";
-			button.setAttribute("onclick", "shanchu()");
-			// button.onclick = function(){shanchu()}；
-
-			li.appendChild(button);
-			label.innerText = inputtext.value;
  		} else {
- 			var ul = document.querySelector(".todo-list");
- 			var li = document.createElement("li");
+ 			ul = document.querySelector(".todo-list");
+ 		}
+
+ 		var li = document.createElement("li");
 			ul.appendChild(li);
 			var input = document .createElement("input");
 			input.type = "checkbox";
@@ -61,24 +52,25 @@ EventUtil.addHandler(inputtext,"keydown", function(event){
 			li.appendChild(label);
 			var button = document.createElement("button");
 			button.className = "destroy";
-			button.setAttribute("onclick", "shanchu()");
 
-			// button.onclick = function(){shanchu()}；
+			button.onclick = deleteItem
 
 			li.appendChild(button);
 			label.innerText = inputtext.value;
 
- 		}
 		list=list+1;
 		inputtext.value = null;
 		// 文本框内容清除
 	};
 });
-function shanchu(){
 
+function deleteItem(event){
 	event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-	// list = list -1;
-
+	list = list -1;
+	if (list==0) {
+		var inputall = document.getElementById("select-all");
+		inputall.parentNode.parentNode.removeChild(inputall.parentNode);
+	}
 
 }
 function checkedlist(){

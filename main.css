@@ -101,7 +101,7 @@ header input::-webkit-input-placeholder{
 	color: rgba(0,8,8,0.2);
 }
 
-.todo-list{
+.todo-list,.main{
 	margin: 0px auto;
 	padding: 0px;
 	list-style: none;
@@ -151,4 +151,11 @@ button{
 }
 .todo-list li:hover button{
 	display: block;
+}
+#select-all{
+	position: absolute;
+	zoom: 70%;
+	width: 34px;
+	height: 55px;
+	margin-top: -70px;
 }
