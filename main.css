@@ -110,7 +110,9 @@ header input::-webkit-input-placeholder{
 	text-align: left;
 }
 
-.todo-list li{
+
+.todo-list li div{
+	/*display: none;*/
 	position: relative;
 	font-size: 24px;
 	border: 1px solid #c0c0c0;
@@ -125,6 +127,7 @@ header input::-webkit-input-placeholder{
 	line-height: 100%;
 	color: gray;
 }
+
 button{
 	position: absolute;
 	display: none;
@@ -158,4 +161,14 @@ button{
 	width: 34px;
 	height: 55px;
 	margin-top: -70px;
+}
+.edit{
+	display: none;
+	width: 474px;
+	height: 23px;
+	padding: 16px 16px 16px 16px;
+	margin-left: 43px;
+	font-size: 24px;
+	border: 1px solid black;
+
 }
