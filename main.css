@@ -82,7 +82,7 @@ a:hover{
 	color: green;
 	text-decoration: underline;
 }
-#foot a{
+#foot a,#todos a{
 	color: #bfbfbf;
 }
 header input{
@@ -128,7 +128,7 @@ header input::-webkit-input-placeholder{
 	color: gray;
 }
 
-button{
+.todo-list button{
 	position: absolute;
 	display: none;
 	margin: auto 0px;
@@ -171,4 +171,51 @@ button{
 	font-size: 24px;
 	border: 1px solid black;
 
+}
+#todos footer{
+	display: block;
+	padding: 10px 15px;
+	background-color: white;
+	margin: 0px auto;
+	width: 520px;
+	height: 20px;
+	text-align: center;
+}
+footer .count{
+	position: absolute;
+	margin-left: -40px;
+	width: 150px;
+	color: #bfbfbf;
+
+}
+footer ul{
+	position: relative;
+	top: -20px;
+	padding: 0px;
+	width: 330px;
+	height: 20px;
+	display: inline-block;
+}
+footer ul li{
+	display: inline-block;
+	list-style: none;
+	margin: 3px;
+	padding: 3px 7px;
+}
+footer button{
+	display: inline-block;
+	position: relative;
+	top: -21px;
+	margin-right: -80px;
+	width: 130px;
+	height: 25px;
+	font-size: 13px;
+	background-color: transparent;
+	border: 0px;
+	color: #bfbfbf;
+
+}
+footer button:hover{
+	text-decoration: underline;
+	cursor: pointer;
 }

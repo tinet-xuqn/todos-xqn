@@ -1,17 +1,3 @@
-// window.onresize = function() {
-
-// 	var pageWidth = window.innerWidth;
-
-// 	if (pageWidth<860) {
-// 		var aside = document.getElementById("sidebar")
-// 		aside.style.left = '-300px';
-// 		var todo = document.getElementById("todos")
-// 		todo.style.paddingLeft = '0px';
-// 		var foot = document.getElementById("foot")
-// 		foot.style.paddingLeft = '0px';
-// 	}
-
-// }
 var inputtext = document.getElementById("myText");
 var list = 0;
 inputtext.onkeydown = createList;
@@ -32,17 +18,70 @@ function createList(event){
 			inputall.onclick = selectAll;
 			section.appendChild(inputall);
 			// 全选按钮
-
 			ul = document.createElement("ul");
 			ul.className = "todo-list";
 			section.appendChild(ul);
+
+			createFooter();
+			function createFooter(){
+				var footer = document.createElement("footer");
+				div.appendChild(footer);
+
+				var divCount = document.createElement("div");
+				divCount.className = "count";
+				footer.appendChild(divCount);
+
+				var strong = document.createElement("strong");
+				divCount.appendChild(strong);
+				var textNode1 = document.createTextNode("1");
+				strong.appendChild(textNode1);
+				var textNode2 = document.createTextNode(" item left");
+				divCount.appendChild(textNode2);
+
+				var footUl = document.createElement("ul");
+				footer.appendChild(footUl);
+
+				var li1 = document.createElement("li");
+				footUl.appendChild(li1);
+				var a1 = document.createElement("a");
+				a1.href = "#/";
+				a1.innerText = "All";
+				a1.onclick = allLi;
+				li1.appendChild(a1);
+
+ 				var li2 = document.createElement("li");
+				footUl.appendChild(li2);
+				var a2 = document.createElement("a");
+				a2.href = "#/active";
+				a2.innerText = "Active";
+				a2.onclick = activeList;
+				li2.appendChild(a2);
+
+				var li3 = document.createElement("li");
+				footUl.appendChild(li3);
+				var a3 = document.createElement("a");
+				a3.href = "#/completed";			
+				a3.innerText = "Completed";
+				a3.onclick = completedList;
+				li3.appendChild(a3);
+
+				var clearButton = document.createElement("button");
+				clearButton.innerText = "Clear completed";
+				clearButton.onclick = clearAllCompleted;
+				footer.appendChild(clearButton);
+
+			}
+
+
  		} else {
  			ul = document.querySelector(".todo-list");
  		}
  		creatLi();
+ 		itemsLeft();
 
  		function creatLi(){
 			var li = document.createElement("li");
+			li.className = "needdo";
 			ul.appendChild(li);
 
 			var myDiv = document.createElement("div");
@@ -51,6 +90,8 @@ function createList(event){
 			var inputEdit = document .createElement("input");
 			inputEdit.type = "text";
 			inputEdit.className = "edit";
+			inputEdit.onkeydown = reWrited;
+			inputEdit.onblur = reWrited;
 			li.appendChild(inputEdit);
 
 
@@ -61,6 +102,7 @@ function createList(event){
 			myDiv.appendChild(input);
 
 			var label = document.createElement("label");
+			label.ondblclick = reWrite;
 			myDiv.appendChild(label);
 
 			var button = document.createElement("button");
@@ -68,6 +110,7 @@ function createList(event){
 			button.onclick = deleteItem;
 			myDiv.appendChild(button);
 			label.innerText = inputtext.value;
+			inputEdit.value = inputtext.value;
 
 
 			var inputall = document.getElementById("select-all");
@@ -82,12 +125,14 @@ function createList(event){
 }
 
 function deleteItem(event){
+	// 删除一个
 	var delItem = event.target.parentNode.parentNode;
 	delItem.parentNode.removeChild(delItem);
 	list = list -1;
 	if (list==0) {
-		var inputall = document.getElementById("select-all");
-		inputall.parentNode.parentNode.removeChild(inputall.parentNode);
+		var divTodos = document.getElementById("todos");
+		divTodos.removeChild(divTodos.lastChild);
+		divTodos.removeChild(divTodos.lastChild);
 	}else {
 		checkIputAll();
 
@@ -97,6 +142,7 @@ function deleteItem(event){
 
 
 function checkedlist(event){
+	// 改变选中是的样式
 	var checkedLi = event.target;
 	if (event.target.checked) {
 		changeStyle(checkedLi);
@@ -121,6 +167,7 @@ function checkIputAll(){
 		inputall.checked = true;	
 		}
 	}
+	itemsLeft();
 }
 
 
@@ -128,13 +175,16 @@ function checkIputAll(){
 function changeStyle(liChecked){
 	liChecked.parentNode.childNodes[1].style.textDecoration = "line-through";
 	liChecked.parentNode.childNodes[1].style.color = '#d9d9d9';
-	liChecked.parentNode.className = "havedone";
+	liChecked.parentNode.parentNode.classList.remove("needdo");
+	liChecked.parentNode.parentNode.className = "havedone";
 }
 // 选中的样式
 function styleChange(liUnchecked){
 	liUnchecked.parentNode.childNodes[1].style.textDecoration = "none";
 	liUnchecked.parentNode.childNodes[1].style.color = 'gray';
-	liUnchecked.parentNode.classList.remove("havedone");		
+	liUnchecked.parentNode.parentNode.classList.remove("havedone");
+	liUnchecked.parentNode.parentNode.className = "needdo";
+		
 }
 // 消选中的样式
 
@@ -158,7 +208,95 @@ function selectAll(event){
 		  	}
 		  }		
 	}
+	itemsLeft();
 
 }
+function reWrite(event){
+	var reWriteLi = event.target.parentNode.parentNode;
+	reWriteLi.childNodes[0].style.display = 'none';
+	reWriteLi.childNodes[1].style.display = 'block';
+	reWriteLi.childNodes[1].focus();
+}
+// 重写
 
+function reWrited(event){
+	var label = event.target.parentNode.childNodes[0].childNodes[1];
+	var reWriteLi=event.target.parentNode;
+	if (event.type == "blur") {
+		change(reWriteLi);
+	}
+	else if (event.type == "keydown"&&(event.keyCode==13)) {
+		change(reWriteLi);
+	}
+	function change(thing){
+		label.innerText = event.target.value;
+		thing.childNodes[0].style.display = 'block';
+		thing.childNodes[1].style.display = 'none';
+	}
+}
+// 重写完成，回车
 
+function clearAllCompleted(event){
+	var all = document.getElementsByClassName("list");				
+	for (var i = all.length-1; i >=0; i--) {
+		// 从末尾遍历
+		if (all[i].type == "checkbox") {
+			if (all[i].checked) {
+				var del = all[i].parentNode.parentNode;
+				del.parentNode.removeChild(del);
+				list = list - 1;
+			}
+		}
+	}
+	if (list==0) {
+		var divTodos = document.getElementById("todos");
+		divTodos.removeChild(divTodos.lastChild);
+		divTodos.removeChild(divTodos.lastChild);
+	}
+}
+function itemsLeft(){
+	var all = document.getElementsByClassName("list");
+	var strong = document.querySelector("strong");
+	var num = 0;
+	for (var i = 0; i < all.length; i++) {
+		if (all[i].type == "checkbox") {
+			if (all[i].checked==false) {
+				num = num +1;
+			}
+		}
+	}				
+	strong.innerText = String(num);
+}
+function checkUpCss(){
+	var head = document.getElementsByTagName("head")[0],
+		len = head.childNodes.length;
+		if (len==4) {
+			head.removeChild(head.lastChild);
+		}
+	
+}
+function allLi(){
+	checkUpCss();
+	var style = document.createElement("style");
+	style.type = "text/css";
+	style.appendChild(document.createTextNode(".havedone{display:list-item;}.needdo{display:list-item}"));
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(style);
+}
+
+function activeList(){
+	checkUpCss();
+	var style = document.createElement("style");
+	style.type = "text/css";
+	style.appendChild(document.createTextNode(".havedone{display:none;}.needdo{display:list-item}"));
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(style);
+}
+function completedList(){
+	checkUpCss();
+	var style = document.createElement("style");
+	style.type = "text/css";
+	style.appendChild(document.createTextNode(".needdo{display:none;}.havedone{display:list-item}"));
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(style);
+}
