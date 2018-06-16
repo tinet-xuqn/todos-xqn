@@ -214,3 +214,11 @@ footer button:hover{
 	text-decoration: underline;
 	cursor: pointer;
 }
+.havedone div label{
+	text-decoration: line-through;
+	color: #d9d9d9;
+}
+.needdo div label{
+	text-decoration: none;
+	color: gray;
+}

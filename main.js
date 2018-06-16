@@ -142,7 +142,7 @@ function deleteItem(event){
 
 
 function checkedlist(event){
-	// 改变选中是的样式
+	// 改变选中的样式
 	var checkedLi = event.target;
 	if (event.target.checked) {
 		changeStyle(checkedLi);
@@ -173,15 +173,11 @@ function checkIputAll(){
 
 
 function changeStyle(liChecked){
-	liChecked.parentNode.childNodes[1].style.textDecoration = "line-through";
-	liChecked.parentNode.childNodes[1].style.color = '#d9d9d9';
 	liChecked.parentNode.parentNode.classList.remove("needdo");
 	liChecked.parentNode.parentNode.className = "havedone";
 }
 // 选中的样式
 function styleChange(liUnchecked){
-	liUnchecked.parentNode.childNodes[1].style.textDecoration = "none";
-	liUnchecked.parentNode.childNodes[1].style.color = 'gray';
 	liUnchecked.parentNode.parentNode.classList.remove("havedone");
 	liUnchecked.parentNode.parentNode.className = "needdo";
 		
@@ -275,36 +271,27 @@ function itemsLeft(){
 	}				
 	strong.innerText = String(num);
 }
-function checkUpCss(){
+function checkUpCss(styleText){
 	var head = document.getElementsByTagName("head")[0],
 		len = head.childNodes.length;
 		if (len==4) {
 			head.removeChild(head.lastChild);
 		}
+
+	var style = document.createElement("style");
+	style.type = "text/css";
+	style.appendChild(document.createTextNode(styleText));
+	var head = document.getElementsByTagName("head")[0];
+	head.appendChild(style);
 	
 }
 function allLi(){
-	checkUpCss();
-	var style = document.createElement("style");
-	style.type = "text/css";
-	style.appendChild(document.createTextNode(".havedone{display:list-item;}.needdo{display:list-item}"));
-	var head = document.getElementsByTagName("head")[0];
-	head.appendChild(style);
+	checkUpCss(".havedone{display:list-item;}.needdo{display:list-item}");
 }
 
 function activeList(){
-	checkUpCss();
-	var style = document.createElement("style");
-	style.type = "text/css";
-	style.appendChild(document.createTextNode(".havedone{display:none;}.needdo{display:list-item}"));
-	var head = document.getElementsByTagName("head")[0];
-	head.appendChild(style);
+	checkUpCss(".havedone{display:none;}.needdo{display:list-item}");
 }
 function completedList(){
-	checkUpCss();
-	var style = document.createElement("style");
-	style.type = "text/css";
-	style.appendChild(document.createTextNode(".needdo{display:none;}.havedone{display:list-item}"));
-	var head = document.getElementsByTagName("head")[0];
-	head.appendChild(style);
+	checkUpCss(".needdo{display:none;}.havedone{display:list-item}");
 }
