@@ -1,7 +1,6 @@
 body{
 	background-color: #F5F5F5;
 	font-family: sans-serif;
-
 }
 aside{
 	position: absolute;
@@ -100,7 +99,6 @@ header input::-webkit-input-placeholder{
 	font-style: italic;
 	color: rgba(0,8,8,0.2);
 }
-
 .todo-list,.main{
 	margin: 0px auto;
 	padding: 0px;
@@ -109,8 +107,6 @@ header input::-webkit-input-placeholder{
 	width: 552px;
 	text-align: left;
 }
-
-
 .todo-list li div{
 	/*display: none;*/
 	position: relative;
@@ -213,7 +209,6 @@ footer button{
 	background-color: transparent;
 	border: 0px;
 	color: #bfbfbf;
-
 }
 footer button:hover{
 	text-decoration: underline;

@@ -255,15 +255,23 @@ function clearAllCompleted(event){
 	}
 }
 function itemsLeft(){
-	var all = document.getElementsByClassName("list");
-	var strong = document.querySelector("strong");
-	var num = 0;
+	var all = document.getElementsByClassName("list"),
+		strong = document.querySelector("strong"),
+	 	num = 0,
+		div = document.querySelector(".count"),
+		textNode = div.lastChild;
 	for (var i = 0; i < all.length; i++) {
 		if (all[i].type == "checkbox") {
 			if (all[i].checked==false) {
 				num = num +1;
 			}
 		}
+	}
+	if (num>1) {
+		textNode.nodeValue = " items left";
+	}else if (num ==1) {
+		textNode.nodeValue = " item left";
+
 	}				
 	strong.innerText = String(num);
 }
