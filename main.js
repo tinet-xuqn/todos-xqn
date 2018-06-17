@@ -12,7 +12,6 @@ function createList(event){
 			section.style.display = "block";
 			var div = document.getElementById("todos");
 			div.appendChild(section);
-
 			var inputall = document .createElement("input");
 			inputall.type = "checkbox";
 			inputall.id = "select-all";
@@ -22,15 +21,12 @@ function createList(event){
 			ul = document.createElement("ul");
 			ul.className = "todo-list";
 			section.appendChild(ul);
-
-			createFooter(div);
-			
+			createFooter(div);	
  		} else {
  			ul = document.querySelector(".todo-list");
  		}
  		creatLi(ul);
  		itemsLeft();
-
 	};
 }
 
@@ -39,28 +35,22 @@ function creatLi(ul){
 	li.className = "needdo";
 	li.setAttribute("data-id",l);
 	ul.appendChild(li);
-
 	var myDiv = document.createElement("div");
 	li.appendChild(myDiv);
-
 	var inputEdit = document .createElement("input");
 	inputEdit.type = "text";
 	inputEdit.className = "edit";
 	inputEdit.onkeydown = reWrited;
 	inputEdit.onblur = reWrited;
 	li.appendChild(inputEdit);
-
-
 	var input = document .createElement("input");
 	input.type = "checkbox";
 	input.className = "list";
 	input.onclick = checkedlist;
 	myDiv.appendChild(input);
-
 	var label = document.createElement("label");
 	label.ondblclick = reWrite;
 	myDiv.appendChild(label);
-
 	var button = document.createElement("button");
 	button.className = "destroy";
 	button.onclick = deleteItem;
@@ -68,7 +58,7 @@ function creatLi(ul){
 
 	label.innerText = inputtext.value;
 	inputEdit.value = inputtext.value;
-
+// 新增时存储
 	var todo = {
 		title : inputtext.value,
 		completed : false,
@@ -76,17 +66,13 @@ function creatLi(ul){
 	};
 	todoList.push(todo);
 	localStorage.setItem("todoList", JSON.stringify(todoList));
+// 新增时存储
 	l++;
-
-
-
 	var inputall = document.getElementById("select-all");
 	inputall.checked=false;
 	// 新增时
 	list=list+1;
-
 	inputtext.value = null;
-
 	// 文本框内容清除
 }		
 
@@ -97,11 +83,10 @@ function deleteItem(event){
 
 	for (var i = 0; i < todoList.length; i++) {
 		if(todoList[i].id == delItem.dataset.id){
-		todoList.splice(i,1);
+			todoList.splice(i,1);
 		}
 	}
 	localStorage.setItem("todoList", JSON.stringify(todoList));
-
 
 	list = list -1;
 	if (list==0) {
@@ -110,9 +95,7 @@ function deleteItem(event){
 		divTodos.removeChild(divTodos.lastChild);
 	}else {
 		checkIputAll();
-
 	}
-
 }
 
 function checkedlist(event){
@@ -140,8 +123,7 @@ function changeStyle(liChecked){
 // 选中的样式
 function styleChange(liUnchecked){
 	liUnchecked.classList.remove("havedone");
-	liUnchecked.className = "needdo";
-		
+	liUnchecked.className = "needdo";		
 }
 // 消选中的样式
 
@@ -186,11 +168,9 @@ function selectAll(event){
 			todoList[i].completed =false;
 		}		
 	}
-
 	localStorage.setItem("todoList", JSON.stringify(todoList));
 
 	itemsLeft();
-
 }
 
 function reWrite(event){
@@ -199,7 +179,7 @@ function reWrite(event){
 	reWriteLi.childNodes[1].style.display = 'block';
 	reWriteLi.childNodes[1].focus();
 }
-// 重写
+// 修改
 
 function reWrited(event){
 	var label = event.target.parentNode.childNodes[0].childNodes[1];
@@ -221,10 +201,9 @@ function reWrited(event){
 			}
 		}
 		localStorage.setItem("todoList", JSON.stringify(todoList));
-
 	}
 }
-// 重写完成，回车
+// 修改完成
 
 function clearAllCompleted(event){
 	var all = document.getElementsByClassName("list");				
@@ -246,33 +225,27 @@ function clearAllCompleted(event){
 	}
 	localStorage.setItem("todoList", JSON.stringify(todoList));
 
-
-
 	if (list==0) {
 		var divTodos = document.getElementById("todos");
 		divTodos.removeChild(divTodos.lastChild);
 		divTodos.removeChild(divTodos.lastChild);
 	}
 }
-
+// 页脚菜单
 function createFooter(div){
 	var footer = document.createElement("footer");
 	div.appendChild(footer);
-
 	var divCount = document.createElement("div");
 	divCount.className = "count";
 	footer.appendChild(divCount);
-
 	var strong = document.createElement("strong");
 	divCount.appendChild(strong);
 	var textNode1 = document.createTextNode("1");
 	strong.appendChild(textNode1);
 	var textNode2 = document.createTextNode(" item left");
 	divCount.appendChild(textNode2);
-
 	var footUl = document.createElement("ul");
 	footer.appendChild(footUl);
-
 	var li1 = document.createElement("li");
 	footUl.appendChild(li1);
 	var a1 = document.createElement("a");
@@ -280,15 +253,13 @@ function createFooter(div){
 	a1.innerText = "All";
 	a1.onclick = allLi;
 	li1.appendChild(a1);
-
-		var li2 = document.createElement("li");
+	var li2 = document.createElement("li");
 	footUl.appendChild(li2);
 	var a2 = document.createElement("a");
 	a2.href = "#/active";
 	a2.innerText = "Active";
 	a2.onclick = activeList;
 	li2.appendChild(a2);
-
 	var li3 = document.createElement("li");
 	footUl.appendChild(li3);
 	var a3 = document.createElement("a");
@@ -296,24 +267,20 @@ function createFooter(div){
 	a3.innerText = "Completed";
 	a3.onclick = completedList;
 	li3.appendChild(a3);
-
 	var clearButton = document.createElement("button");
 	clearButton.innerText = "Clear completed";
 	clearButton.onclick = clearAllCompleted;
 	footer.appendChild(clearButton);
-
 }
 
 function itemsLeft(){
 	var all = document.getElementsByClassName("list"),
 		strong = document.querySelector("strong"),
 	 	num = 0,
-		div = document.querySelector(".count");
-		
+		div = document.querySelector(".count");	
 	if(!div) {
 
 	}
-
 	var textNode = div.lastChild;
 	for (var i = 0; i < all.length; i++) {
 		if (all[i].type == "checkbox") {
@@ -326,7 +293,6 @@ function itemsLeft(){
 		textNode.nodeValue = " items left";
 	}else if (num ==1) {
 		textNode.nodeValue = " item left";
-
 	}				
 	strong.innerText = String(num);
 }
@@ -334,31 +300,28 @@ function itemsLeft(){
 function checkUpCss(styleText){
 	var head = document.getElementsByTagName("head")[0],
 		len = head.childNodes.length;
-		if (len==4) {
-			head.removeChild(head.lastChild);
-		}
+	if (len==4) {
+		head.removeChild(head.lastChild);
+	}
 	var style = document.createElement("style");
 	style.type = "text/css";
 	style.appendChild(document.createTextNode(styleText));
 	var head = document.getElementsByTagName("head")[0];
 	head.appendChild(style);
-	
 }
 function allLi(){
 	checkUpCss(".havedone{display:list-item;}.needdo{display:list-item}");
 }
-
 function activeList(){
 	checkUpCss(".havedone{display:none;}.needdo{display:list-item}");
 }
 function completedList(){
 	checkUpCss(".needdo{display:none;}.havedone{display:list-item}");
 }
+
 window.onload = function(){
-
-
 	todoList = JSON.parse(localStorage.getItem("todoList"));
-	console.log(todoList);	
+	console.log(todoList);
 	if (todoList == null || todoList.length === 0) {
 		todoList = new Array();
 		list = 0;
@@ -370,7 +333,6 @@ window.onload = function(){
 		section.style.display = "block";
 		var div = document.getElementById("todos");
 		div.appendChild(section);
-
 		var inputall = document .createElement("input");
 		inputall.type = "checkbox";
 		inputall.id = "select-all";
@@ -378,15 +340,12 @@ window.onload = function(){
 		section.appendChild(inputall);
 		// 全选按钮
 		inputall.checked =true;
-
-
 		ul = document.createElement("ul");
 		ul.className = "todo-list";
 		section.appendChild(ul);
-
 		createFooter(div);
-		for (var i = 0; i < todoList.length; i++) {
 
+		for (var i = 0; i < todoList.length; i++) {
 			if(todoList[i].completed ==false){
 				inputall.checked = false;
 			}
@@ -394,41 +353,32 @@ window.onload = function(){
 			li.className = "needdo";
 			li.setAttribute("data-id", todoList[i].id);
 			ul.appendChild(li);
-
 			var myDiv = document.createElement("div");
 			li.appendChild(myDiv);
-
 			var inputEdit = document .createElement("input");
 			inputEdit.type = "text";
 			inputEdit.className = "edit";
 			inputEdit.onkeydown = reWrited;
 			inputEdit.onblur = reWrited;
 			li.appendChild(inputEdit);
-
-
 			var input = document .createElement("input");
 			input.type = "checkbox";
 			input.className = "list";
 			input.onclick = checkedlist;
 			input.checked = todoList[i].completed;
-
 			if (input.checked) {
 				changeStyle(li);
 			} else {
 				styleChange(li);
 			}
-
 			myDiv.appendChild(input);
-
 			var label = document.createElement("label");
 			label.ondblclick = reWrite;
 			myDiv.appendChild(label);
-
 			var button = document.createElement("button");
 			button.className = "destroy";
 			button.onclick = deleteItem;
 			myDiv.appendChild(button);
-
 			label.innerText = todoList[i].title;
 			inputEdit.value = todoList[i].title;
 		}
