@@ -75,7 +75,6 @@ function creatLi(ul){
 	inputtext.value = null;
 	// 文本框内容清除
 }		
-
 function deleteItem(event){
 	// 删除一个
 	var delItem = event.target.parentNode.parentNode;
@@ -97,7 +96,6 @@ function deleteItem(event){
 		checkIputAll();
 	}
 }
-
 function checkedlist(event){
 	// 改变选中的样式
 	var checkedLi = event.target.parentNode.parentNode;
@@ -115,7 +113,6 @@ function checkedlist(event){
 	}
 	localStorage.setItem("todoList", JSON.stringify(todoList));
 }
-
 function changeStyle(liChecked){
 	liChecked.classList.remove("needdo");
 	liChecked.className = "havedone";
@@ -125,8 +122,7 @@ function styleChange(liUnchecked){
 	liUnchecked.classList.remove("havedone");
 	liUnchecked.className = "needdo";		
 }
-// 消选中的样式
-
+// 取消选中的样式
 function checkIputAll(){
 // 改变全选框的状态
 	var all = document.getElementsByClassName("list");				
@@ -143,7 +139,6 @@ function checkIputAll(){
 	}
 	itemsLeft();
 }
-
 function selectAll(event){	
 	var all = document.getElementsByClassName("list");
 	// 全选
@@ -169,7 +164,6 @@ function selectAll(event){
 		}		
 	}
 	localStorage.setItem("todoList", JSON.stringify(todoList));
-
 	itemsLeft();
 }
 
@@ -180,7 +174,6 @@ function reWrite(event){
 	reWriteLi.childNodes[1].focus();
 }
 // 修改
-
 function reWrited(event){
 	var label = event.target.parentNode.childNodes[0].childNodes[1];
 	var reWriteLi=event.target.parentNode;
@@ -204,7 +197,6 @@ function reWrited(event){
 	}
 }
 // 修改完成
-
 function clearAllCompleted(event){
 	var all = document.getElementsByClassName("list");				
 	for (var i = all.length-1; i >=0; i--) {
@@ -272,7 +264,6 @@ function createFooter(div){
 	clearButton.onclick = clearAllCompleted;
 	footer.appendChild(clearButton);
 }
-
 function itemsLeft(){
 	var all = document.getElementsByClassName("list"),
 		strong = document.querySelector("strong"),
@@ -296,7 +287,6 @@ function itemsLeft(){
 	}				
 	strong.innerText = String(num);
 }
-
 function checkUpCss(styleText){
 	var head = document.getElementsByTagName("head")[0],
 		len = head.childNodes.length;

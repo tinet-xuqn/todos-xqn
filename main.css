@@ -35,7 +35,6 @@ aside{
 	font-size: 10px;
 	color: #bfbfbf;
 }
-
 @media screen and (max-width: 890px){
 	aside{left: -300px;}
 	#todos{padding-left: 0px;}
